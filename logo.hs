@@ -18,7 +18,7 @@ upload to wiki
 -}
 
 main :: IO ()
-main = mainWith explicitPoints
+main = mainWith $ explicitPoints & center & pad 1.1
 
 -- | Points taken from <wiki.haskell.org/Thompson-Wheeler_logo wiki>.
 explicitPoints :: Diagram B
