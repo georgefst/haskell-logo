@@ -12,8 +12,6 @@ import Diagrams.Prelude
 turn in to cabal script
     for now:
         cabal install --package-env . --allow-newer='*:base' --lib diagrams-lib diagrams-core diagrams-svg
-upload to wiki
-    include original, simpler, explicit points version
 -}
 
 main :: IO ()
@@ -23,24 +21,46 @@ d :: Diagram B
 d =
     position
         [
+            ( p2 (125, 60)
+            , reflectX $ horizontal purple0
+            )
+        ,
+            ( p2 (195, 75)
+            , reflectY $ horizontalChopped purple2 150
+            )
+        ,
+            ( p2 (255, -15)
+            , polygonFromCoords
+                purple2
+                [ (0, 0)
+                , (-20, 30)
+                , (70, 30)
+                , (90, 0)
+                ]
+            )
+        ,
+            ( p2 (205, -15)
+            , reflectY $ horizontalChopped purple2 140
+            )
+        ,
+            ( p2 (-165, -180)
+            , horizontal purple1
+            )
+        ,
             ( p2 (0, 0)
             , reflectX (diagonal purple0)
-                === reflectX (reflectY (diagonal purple0))
+                === reflectX (reflectY (diagonal purple1))
             )
         ,
             ( p2 (120, 0)
-            , reflectX (diagonal purple1)
-                === ( reflectY (diagonal purple1)
-                        <> reflectX (reflectY (diagonal purple1))
+            , reflectX (diagonal purple0)
+                === ( reflectY (diagonal grey2)
+                        <> reflectX (reflectY (diagonal grey2))
                     )
             )
         ,
             ( p2 (145, 75)
-            , reflectY $ horizontal purple2 200
-            )
-        ,
-            ( p2 (205, -15)
-            , reflectY $ horizontal purple2 140
+            , reflectY $ horizontalChopped grey2 200
             )
         ]
 
@@ -55,14 +75,24 @@ diagonal c =
             , (90, 0)
             ]
 
-horizontal :: Colour Double -> Double -> Diagram B
-horizontal c x =
+horizontalChopped :: Colour Double -> Double -> Diagram B
+horizontalChopped c x =
     polygonFromCoords
         c
         [ (0, 0)
         , (40, 60)
         , (x, 60)
         , (x, 0)
+        ]
+
+horizontal :: Colour Double -> Diagram B
+horizontal c =
+    polygonFromCoords
+        c
+        [ (0, 0)
+        , (40, 60)
+        , (250, 60)
+        , (210, 0)
         ]
 
 polygonFromCoords :: Colour Double -> [(Double, Double)] -> Diagram B
@@ -81,3 +111,9 @@ purple1 :: Colour Double
 purple1 = sRGB24read "#5e5086"
 purple2 :: Colour Double
 purple2 = sRGB24read "#8f4e8b"
+grey0 :: Colour Double
+grey0 = sRGB24read "#666666"
+grey1 :: Colour Double
+grey1 = sRGB24read "#999999"
+grey2 :: Colour Double
+grey2 = sRGB24read "#bbbbbb"
