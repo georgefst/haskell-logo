@@ -62,8 +62,8 @@ diagonal y c =
             , (90, 0)
             ]
 
-horizontalChopped :: Colour Double -> Double -> Diagram B
-horizontalChopped c x =
+horizontalChopped :: Double -> Colour Double -> Diagram B
+horizontalChopped x c =
     polygonFromCoords
         c
         [ (0, 0)
