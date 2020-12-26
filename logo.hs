@@ -21,19 +21,30 @@ d :: Diagram B
 d =
     position
         [
-            ( p2 (75, -60)
-            , scale (1/6) $ center hs
+            ( p2 (45, 0)
+            , lc grey0 $
+                polygonFromCoords
+                    grey1
+                    [ (0, 0)
+                    , (-40, 60)
+                    , (-10, 60)
+                    , (110, -120)
+                    , (80, -120)
+                    , (15, -22.5)
+                    , (-50, -120)
+                    , (-80, -120)
+                    ]
             )
         ,
-            ( p2 (170, -60)
+            ( p2 (160, -60)
             , reflectY $ diagonal 40 purple2
             )
         ,
-            ( p2 (125, -60)
+            ( p2 (115, -60)
             , horizontal 170 purple2
             )
         ,
-            ( p2 (45, -180)
+            ( p2 (35, -180)
             , horizontal 170 purple2
             )
         ,
@@ -42,7 +53,7 @@ d =
             )
         ,
             ( p2 (-165, -180)
-            , horizontal 210 purple1
+            , horizontal 200 purple1
             )
         ,
             ( p2 (0, 0)
