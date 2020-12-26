@@ -21,21 +21,6 @@ d :: Diagram B
 d =
     position
         [
-            ( p2 (45, 0)
-            , lc grey0 $
-                polygonFromCoords
-                    grey1
-                    [ (0, 0)
-                    , (-40, 60)
-                    , (-10, 60)
-                    , (110, -120)
-                    , (80, -120)
-                    , (15, -22.5)
-                    , (-50, -120)
-                    , (-80, -120)
-                    ]
-            )
-        ,
             ( p2 (160, -60)
             , reflectY $ diagonal 40 purple2
             )
