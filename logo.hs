@@ -21,57 +21,44 @@ d :: Diagram B
 d =
     position
         [
+            ( p2 (170, -60)
+            , reflectY $ diagonal 40 purple2
+            )
+        ,
+            ( p2 (125, -60)
+            , horizontal 170 purple2
+            )
+        ,
+            ( p2 (45, -180)
+            , horizontal 170 purple2
+            )
+        ,
             ( p2 (125, 60)
-            , reflectX $ horizontal purple0
-            )
-        ,
-            ( p2 (195, 75)
-            , reflectY $ horizontalChopped purple2 150
-            )
-        ,
-            ( p2 (255, -15)
-            , polygonFromCoords
-                purple2
-                [ (0, 0)
-                , (-20, 30)
-                , (70, 30)
-                , (90, 0)
-                ]
-            )
-        ,
-            ( p2 (205, -15)
-            , reflectY $ horizontalChopped purple2 140
+            , reflectX $ horizontal 210 purple0
             )
         ,
             ( p2 (-165, -180)
-            , horizontal purple1
+            , horizontal 210 purple1
             )
         ,
             ( p2 (0, 0)
-            , reflectX (diagonal purple0)
-                === reflectX (reflectY (diagonal purple1))
+            , reflectX (diagonal 120 purple0)
+                === reflectX (reflectY (diagonal 120 purple1))
             )
         ,
             ( p2 (120, 0)
-            , reflectX (diagonal purple0)
-                === ( reflectY (diagonal grey2)
-                        <> reflectX (reflectY (diagonal grey2))
-                    )
-            )
-        ,
-            ( p2 (145, 75)
-            , reflectY $ horizontalChopped grey2 200
+            , reflectX (diagonal 120 purple0)
             )
         ]
 
-diagonal :: Colour Double -> Diagram B
-diagonal c =
+diagonal :: Double -> Colour Double -> Diagram B
+diagonal y c =
     translate (V2 (-45) 0) $
         polygonFromCoords
             c
             [ (0, 0)
-            , (120, 180)
-            , (210, 180)
+            , (y, 3 * y / 2)
+            , (y + 90, 3 * y / 2)
             , (90, 0)
             ]
 
@@ -85,14 +72,14 @@ horizontalChopped c x =
         , (x, 0)
         ]
 
-horizontal :: Colour Double -> Diagram B
-horizontal c =
+horizontal :: Double -> Colour Double -> Diagram B
+horizontal x c =
     polygonFromCoords
         c
         [ (0, 0)
         , (40, 60)
-        , (250, 60)
-        , (210, 0)
+        , (x + 40, 60)
+        , (x, 0)
         ]
 
 polygonFromCoords :: Colour Double -> [(Double, Double)] -> Diagram B
