@@ -21,6 +21,10 @@ d :: Diagram B
 d =
     position
         [
+            ( p2 (75, -60)
+            , scale (1/6) $ center hs
+            )
+        ,
             ( p2 (170, -60)
             , reflectY $ diagonal 40 purple2
             )
@@ -48,6 +52,31 @@ d =
         ,
             ( p2 (120, 0)
             , reflectX (diagonal 120 purple0)
+            )
+        ]
+
+hs :: Diagram B
+hs =
+    position
+        [
+            ( p2 (0, 0)
+            , reflectX (diagonal 120 grey0)
+                === reflectX (reflectY (diagonal 120 grey0))
+            )
+        ,
+            ( p2 (120, 0)
+            , reflectX (diagonal 120 grey1)
+                === ( reflectY (diagonal 120 grey1)
+                        <> reflectX (reflectY (diagonal 120 grey1))
+                    )
+            )
+        ,
+            ( p2 (145, 75)
+            , reflectY $ horizontalChopped 200 grey2
+            )
+        ,
+            ( p2 (205, -15)
+            , reflectY $ horizontalChopped 140 grey2
             )
         ]
 
