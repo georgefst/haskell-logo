@@ -2,10 +2,8 @@
 {-# LANGUAGE NoMonomorphismRestriction #-}
 {-# OPTIONS_GHC -Wall #-}
 
-module Main where
+module Main (main) where
 
-import Data.List.NonEmpty (NonEmpty ((:|)))
-import Data.List.NonEmpty qualified as NE
 import Diagrams.Backend.SVG
 import Diagrams.Backend.SVG.CmdLine
 import Diagrams.Prelude
@@ -15,58 +13,66 @@ turn in to cabal script
     for now:
         cabal install --package-env . --allow-newer='*:base' --lib diagrams-lib diagrams-core diagrams-svg
 upload to wiki
+    include original, simpler, explicit points version
 -}
 
 main :: IO ()
-main = mainWith $ explicitPoints & center & pad 1.1
+main = mainWith $ d & center & pad 1.1 & lwG 0.5
 
--- | Points taken from <wiki.haskell.org/Thompson-Wheeler_logo wiki>.
-explicitPoints :: Diagram B
-explicitPoints =
-    foldMap
-        ( \(colour, points) ->
-            let ps = p2 <$> points
-             in transform reflectionY . moveTo (NE.head ps) . fc colour . stroke . closeLine . fromVertices $ NE.toList ps
-        )
+d :: Diagram B
+d =
+    position
         [
-            ( purple0
-            , (0, 120)
-                :| [ (40, 60)
-                   , (0, 0)
-                   , (30, 0)
-                   , (70, 60)
-                   , (30, 120)
-                   ]
+            ( p2 (0, 0)
+            , reflectX (diagonal purple0)
+                === reflectX (reflectY (diagonal purple0))
             )
         ,
-            ( purple1
-            , (40, 120)
-                :| [ (80, 60)
-                   , (40, 0)
-                   , (70, 0)
-                   , (150, 120)
-                   , (120, 120)
-                   , (95, 82.5)
-                   , (70, 120)
-                   ]
+            ( p2 (120, 0)
+            , reflectX (diagonal purple1)
+                === ( reflectY (diagonal purple1)
+                        <> reflectX (reflectY (diagonal purple1))
+                    )
             )
         ,
-            ( purple2
-            , (136.666667, 85)
-                :| [ (123.333333, 65)
-                   , (170, 65)
-                   , (170, 85)
-                   ]
+            ( p2 (145, 75)
+            , reflectY $ horizontal purple2 200
             )
         ,
-            ( purple2
-            , (116.666667, 55)
-                :| [ (103.333333, 35)
-                   , (170, 35)
-                   , (170, 55)
-                   ]
+            ( p2 (205, -15)
+            , reflectY $ horizontal purple2 140
             )
         ]
+
+diagonal :: Colour Double -> Diagram B
+diagonal c =
+    translate (V2 (-45) 0) $
+        polygonFromCoords
+            c
+            [ (0, 0)
+            , (120, 180)
+            , (210, 180)
+            , (90, 0)
+            ]
+
+horizontal :: Colour Double -> Double -> Diagram B
+horizontal c x =
+    polygonFromCoords
+        c
+        [ (0, 0)
+        , (40, 60)
+        , (x, 60)
+        , (x, 0)
+        ]
+
+polygonFromCoords :: Colour Double -> [(Double, Double)] -> Diagram B
+polygonFromCoords c =
+    fc c
+        . lc c
+        . stroke
+        . closeLine
+        . fromVertices
+        . map p2
 
 -- from haskell.org
 purple0 :: Colour Double
