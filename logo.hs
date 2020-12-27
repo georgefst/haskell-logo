@@ -20,15 +20,6 @@ d :: Diagram B
 d =
     position
         [
-            ( p2 (60, -22.5)
-            , polygonFromCoords
-                grey1
-                [ (0, 0)
-                , (65, -97.5)
-                , (-65, -97.5)
-                ]
-            )
-        ,
             ( p2 (115, -60)
             , polygonFromCoords
                 purple2

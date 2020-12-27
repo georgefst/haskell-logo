@@ -27,7 +27,4 @@
 	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(143,78,139)" stroke-linecap="butt" stroke-miterlimit="10.0">
 		<path d="M 564.9351,478.6642 l 74.2115,-111.3173 l 92.7644,111.3173 l 74.2115,111.3173 l -74.2115,111.3173 l -92.7644,-111.3173 Z" />
 	</g>
-	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(153,153,153)" stroke-linecap="butt" stroke-miterlimit="10.0">
-		<path d="M 462.8942,409.0909 l 120.5937,180.8905 h -241.1874 Z" />
-	</g>
 </svg>
