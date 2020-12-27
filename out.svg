@@ -3,28 +3,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" height="734.6939" stroke-opacity="1" viewBox="0.0 0.0 1000.0 734.6938775510204" font-size="1" width="1000.0000" xmlns:xlink="http://www.w3.org/1999/xlink" stroke="rgb(0,0,0)" version="1.1">
 	<defs>
 	</defs>
-	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(69,58,98)" stroke-width="0.9276437847866419" fill="rgb(69,58,98)" stroke-linecap="butt" stroke-miterlimit="10.0">
+	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(69,58,98)" stroke-linecap="butt" stroke-miterlimit="10.0">
 		<path d="M 657.6994,367.3469 l -222.6345,-333.9518 h -166.9759 l 222.6345,333.9518 Z" />
 	</g>
-	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(94,80,134)" stroke-width="0.9276437847866419" fill="rgb(94,80,134)" stroke-linecap="butt" stroke-miterlimit="10.0">
+	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(94,80,134)" stroke-linecap="butt" stroke-miterlimit="10.0">
 		<path d="M 435.0649,367.3469 l -222.6345,333.9518 h -166.9759 l 222.6345,-333.9518 Z" />
 	</g>
-	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(69,58,98)" stroke-width="0.9276437847866419" fill="rgb(69,58,98)" stroke-linecap="butt" stroke-miterlimit="10.0">
+	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(69,58,98)" stroke-linecap="butt" stroke-miterlimit="10.0">
 		<path d="M 435.0649,367.3469 l -222.6345,-333.9518 h -166.9759 l 222.6345,333.9518 Z" />
 	</g>
-	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(94,80,134)" stroke-width="0.9276437847866419" fill="rgb(94,80,134)" stroke-linecap="butt" stroke-miterlimit="10.0">
+	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(94,80,134)" stroke-linecap="butt" stroke-miterlimit="10.0">
 		<path d="M 45.4545,701.2987 l 74.2115,-111.3173 h 371.0575 l -74.2115,111.3173 Z" />
 	</g>
-	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(69,58,98)" stroke-width="0.9276437847866419" fill="rgb(69,58,98)" stroke-linecap="butt" stroke-miterlimit="10.0">
+	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(69,58,98)" stroke-linecap="butt" stroke-miterlimit="10.0">
 		<path d="M 583.4879,256.0297 l -74.2115,-111.3173 h -389.6104 l 74.2115,111.3173 Z" />
 	</g>
-	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(143,78,139)" stroke-width="0.9276437847866419" fill="rgb(143,78,139)" stroke-linecap="butt" stroke-miterlimit="10.0">
+	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(143,78,139)" stroke-linecap="butt" stroke-miterlimit="10.0">
 		<path d="M 416.5121,701.2987 l 74.2115,-111.3173 h 315.3989 l -74.2115,111.3173 Z" />
 	</g>
-	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(143,78,139)" stroke-width="0.9276437847866419" fill="rgb(143,78,139)" stroke-linecap="butt" stroke-miterlimit="10.0">
+	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(143,78,139)" stroke-linecap="butt" stroke-miterlimit="10.0">
 		<path d="M 564.9351,478.6642 l 74.2115,-111.3173 h 315.3989 l -74.2115,111.3173 Z" />
 	</g>
-	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(143,78,139)" stroke-width="0.9276437847866419" fill="rgb(143,78,139)" stroke-linecap="butt" stroke-miterlimit="10.0">
-		<path d="M 564.9351,478.6642 l 74.2115,111.3173 h 166.9759 l -74.2115,-111.3173 Z" />
+	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(143,78,139)" stroke-linecap="butt" stroke-miterlimit="10.0">
+		<path d="M 564.9351,478.6642 l 74.2115,-111.3173 l 92.7644,111.3173 l 74.2115,111.3173 l -74.2115,111.3173 l -92.7644,-111.3173 Z" />
 	</g>
 </svg>

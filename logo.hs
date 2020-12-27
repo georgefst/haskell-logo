@@ -14,14 +14,22 @@ turn in to cabal script
 -}
 
 main :: IO ()
-main = mainWith $ d & center & pad 1.1 & lwG 0.5
+main = mainWith $ d & center & pad 1.1
 
 d :: Diagram B
 d =
     position
         [
-            ( p2 (160, -60)
-            , reflectY $ diagonal 40 purple2
+            ( p2 (115, -60)
+            , polygonFromCoords
+                purple2
+                [ (0, 0)
+                , (40, 60)
+                , (90, 0)
+                , (130, -60)
+                , (90, -120)
+                , (40, -60)
+                ]
             )
         ,
             ( p2 (115, -60)
@@ -109,7 +117,7 @@ horizontal x c =
 polygonFromCoords :: Colour Double -> [(Double, Double)] -> Diagram B
 polygonFromCoords c =
     fc c
-        . lc c
+        . lw 0
         . stroke
         . closeLine
         . fromVertices
