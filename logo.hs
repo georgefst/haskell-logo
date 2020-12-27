@@ -20,6 +20,10 @@ d :: Diagram B
 d =
     position
         [
+            ( p2 (70, -60)
+            , scale (1 / 6) $ center hs
+            )
+        ,
             ( p2 (115, -60)
             , polygonFromCoords
                 purple2

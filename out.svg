@@ -27,4 +27,25 @@
 	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(143,78,139)" stroke-linecap="butt" stroke-miterlimit="10.0">
 		<path d="M 564.9351,478.6642 l 74.2115,-111.3173 l 92.7644,111.3173 l 74.2115,111.3173 l -74.2115,111.3173 l -92.7644,-111.3173 Z" />
 	</g>
+	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(187,187,187)" stroke-linecap="butt" stroke-miterlimit="10.0">
+		<path d="M 517.0068,483.3024 l 12.3686,18.5529 h 30.9215 v -18.5529 Z" />
+	</g>
+	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(187,187,187)" stroke-linecap="butt" stroke-miterlimit="10.0">
+		<path d="M 498.4539,455.4731 l 12.3686,18.5529 h 49.4743 v -18.5529 Z" />
+	</g>
+	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(153,153,153)" stroke-linecap="butt" stroke-miterlimit="10.0">
+		<path d="M 504.6382,478.6642 l -37.1058,55.6586 h -27.8293 l 37.1058,-55.6586 Z" />
+	</g>
+	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(153,153,153)" stroke-linecap="butt" stroke-miterlimit="10.0">
+		<path d="M 476.8089,478.6642 l 37.1058,55.6586 h 27.8293 l -37.1058,-55.6586 Z" />
+	</g>
+	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(153,153,153)" stroke-linecap="butt" stroke-miterlimit="10.0">
+		<path d="M 504.6382,478.6642 l -37.1058,-55.6586 h -27.8293 l 37.1058,55.6586 Z" />
+	</g>
+	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(102,102,102)" stroke-linecap="butt" stroke-miterlimit="10.0">
+		<path d="M 467.5325,478.6642 l -37.1058,55.6586 h -27.8293 l 37.1058,-55.6586 Z" />
+	</g>
+	<g stroke-linejoin="miter" stroke-opacity="1.0" fill-opacity="1.0" stroke="rgb(0,0,0)" stroke-width="0.0" fill="rgb(102,102,102)" stroke-linecap="butt" stroke-miterlimit="10.0">
+		<path d="M 467.5325,478.6642 l -37.1058,-55.6586 h -27.8293 l 37.1058,55.6586 Z" />
+	</g>
 </svg>
