@@ -14,6 +14,15 @@ turn in to cabal script
     for now:
         cabal install --package-env . --allow-newer='*:base' --lib diagrams-lib diagrams-core diagrams-svg svg-builder
 less use of absolute positions for 'hs'
+crispEdges
+    possible for perfect horizontal/vertical lines only?
+        https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/shape-rendering
+    workarounds
+        align to pixels
+            https://stackoverflow.com/questions/23376308/avoiding-lines-between-adjecent-svg-rectangles
+        lw /= 0
+    why does diagrams.keyVal work for "class" but not "shape-rendering"?
+        means we can only apply "crisp-edges" globally
 -}
 
 main :: IO ()
