@@ -1,3 +1,4 @@
+{-# LANGUAGE NegativeLiterals #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE NoMonomorphismRestriction #-}
 {-# OPTIONS_GHC -Wall #-}
