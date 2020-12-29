@@ -13,12 +13,13 @@ import Graphics.Svg (makeAttribute, prettyText)
 turn in to cabal script
     for now:
         cabal install --package-env . --allow-newer='*:base' --lib diagrams-lib diagrams-core diagrams-svg svg-builder
+less use of absolute positions for 'hs'
 -}
 
 main :: IO ()
 main =
     TL.writeFile "out.svg" . prettyText . renderDia SVG opts $
-        d & center & scaleY 1.5 & pad 1.1 & lw 0
+        hlsWithHs & center & scaleY 1.5 & pad 1.1 & lw 0
   where
     opts =
         SVGOptions
@@ -29,46 +30,43 @@ main =
             , _generateDoctype = True
             }
 
-d :: Diagram B
-d =
-    position
-        [
-            ( p2 (70, -40)
-            , scale (1 / 6) $ center hs
+hlsWithHs :: Diagram B
+hlsWithHs =
+    center hls
+        <> moveTo (p2 (-10, -40)) (scale (1 / 6) (center hs))
+
+hls :: Diagram B
+hls =
+    alignBL h
+        === alignTL
+            ( (l & snugB & snugR)
+                <> (s & alignBL)
             )
-        ,
-            ( p2 (120, 0)
-            , reflectX $ diagonal 120 & fc purple0
+
+h :: Diagram B
+h =
+    fc purple0 $
+        reflectX $
+            ( (diagonal 120 & centerY & snugL) <> (horizontal 210 & center & snugL)
+                & snugR
             )
-        ,
-            ( p2 (125, 40)
-            , reflectX $ horizontal 210 & fc purple0
-            )
-        ,
-            ( 0
-            , reflectX $ diagonal 120 & fc purple0
-            )
-        ,
-            ( p2 (-165, -120)
-            , horizontal 200 & fc purple1
-            )
-        ,
-            ( 0
-            , reflectX $ reflectY $ diagonal 120 & fc purple1
-            )
-        ,
-            ( p2 (160, -40)
-            , reflectY $ diagonal 40 & fc purple2
-            )
-        ,
-            ( p2 (115, -40)
-            , horizontal 170 & fc purple2
-            )
-        ,
-            ( p2 (35, -120)
-            , horizontal 170 & fc purple2
-            )
-        ]
+                <> (diagonal 120 & centerY & snugR)
+
+l :: Diagram B
+l =
+    fc purple1 $
+        (horizontal 200 & alignBL)
+            <> (diagonal 120 & alignBL)
+
+s :: Diagram B
+s =
+    fc purple2 $
+        (horizontal 170 & alignTR)
+            <> ( (diagonal 40 & reflectY & alignTL)
+                    <> (horizontal 170 & alignBL)
+                    & alignBR
+                    & snugR
+               )
 
 hs :: Diagram B
 hs =
@@ -80,16 +78,19 @@ hs =
             )
         ,
             ( p2 (120, 0)
-            , reflectX (diagonal 120) === (reflectY (diagonal 120) <> reflectX (reflectY (diagonal 120)))
+            , reflectX (diagonal 120)
+                === ( (diagonal 120 & reflectY & reflectX)
+                        <> (diagonal 120 & reflectY & snugR)
+                    )
                 & fc grey1
             )
         ,
-            ( p2 (145, 50)
+            ( p2 (100, 50)
             , reflectY (horizontalChopped 200)
                 & fc grey2
             )
         ,
-            ( p2 (205, -10)
+            ( p2 (160, -10)
             , reflectY (horizontalChopped 140)
                 & fc grey2
             )
@@ -97,13 +98,12 @@ hs =
 
 diagonal :: Double -> Diagram B
 diagonal y =
-    translate (V2 (-45) 0) $
-        polygonFromCoords
-            [ (0, 0)
-            , (y, y)
-            , (y + 90, y)
-            , (90, 0)
-            ]
+    polygonFromCoords
+        [ (0, 0)
+        , (y, y)
+        , (y + 90, y)
+        , (90, 0)
+        ]
 
 horizontalChopped :: Double -> Diagram B
 horizontalChopped x =
