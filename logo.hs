@@ -18,7 +18,7 @@ turn in to cabal script
 main :: IO ()
 main =
     TL.writeFile "out.svg" . prettyText . renderDia SVG opts $
-        d & center & pad 1.1
+        d & center & scaleY 1.5 & pad 1.1
   where
     opts =
         SVGOptions
@@ -33,27 +33,27 @@ d :: Diagram B
 d =
     position
         [
-            ( p2 (70, -60)
+            ( p2 (70, -40)
             , scale (1 / 6) $ center hs
             )
         ,
-            ( p2 (160, -60)
+            ( p2 (160, -40)
             , reflectY $ diagonal 40 purple2
             )
         ,
-            ( p2 (115, -60)
+            ( p2 (115, -40)
             , horizontal 170 purple2
             )
         ,
-            ( p2 (35, -180)
+            ( p2 (35, -120)
             , horizontal 170 purple2
             )
         ,
-            ( p2 (125, 60)
+            ( p2 (125, 40)
             , reflectX $ horizontal 210 purple0
             )
         ,
-            ( p2 (-165, -180)
+            ( p2 (-165, -120)
             , horizontal 200 purple1
             )
         ,
@@ -83,11 +83,11 @@ hs =
                     )
             )
         ,
-            ( p2 (145, 75)
+            ( p2 (145, 50)
             , reflectY $ horizontalChopped 200 grey2
             )
         ,
-            ( p2 (205, -15)
+            ( p2 (205, -10)
             , reflectY $ horizontalChopped 140 grey2
             )
         ]
@@ -98,8 +98,8 @@ diagonal y c =
         polygonFromCoords
             c
             [ (0, 0)
-            , (y, 3 * y / 2)
-            , (y + 90, 3 * y / 2)
+            , (y, y)
+            , (y + 90, y)
             , (90, 0)
             ]
 
@@ -108,8 +108,8 @@ horizontalChopped x c =
     polygonFromCoords
         c
         [ (0, 0)
-        , (40, 60)
-        , (x, 60)
+        , (40, 40)
+        , (x, 40)
         , (x, 0)
         ]
 
@@ -118,8 +118,8 @@ horizontal x c =
     polygonFromCoords
         c
         [ (0, 0)
-        , (40, 60)
-        , (x + 40, 60)
+        , (40, 40)
+        , (x + 40, 40)
         , (x, 0)
         ]
 
