@@ -5,10 +5,12 @@
 
 module Main (main) where
 
-import qualified Data.Text.Lazy.IO as TL
+import qualified Data.ByteString.Lazy.Char8 as BS
 import Diagrams.Backend.SVG
 import Diagrams.Prelude
-import Graphics.Svg (makeAttribute, prettyText)
+import Graphics.Svg (renderBS)
+import RawFilePath.Process
+import System.IO
 
 {- TODO
 turn in to cabal script
@@ -23,21 +25,34 @@ crispEdges
             https://stackoverflow.com/questions/23376308/avoiding-lines-between-adjecent-svg-rectangles
         lw /= 0
         write post-processing tool to merge adjacent shapes with same attributes (at least colour)
+            or use svgo
+                unmaintained (ish)
+                    https://github.com/svg/svgo/issues/1055
+                only really need 'mergePaths' and 'collapseGroups'
+                    https://github.com/svg/svgo/blob/master/docs/how-it-works/en.md#1-config
+                will not merge the bottom two elements of S
+                    happy with either of the other pairs
+                        including top and bottom...
     why does diagrams.keyVal work for "class" but not "shape-rendering"?
         means we can only apply "crisp-edges" globally
 -}
 
 main :: IO ()
-main =
-    TL.writeFile "out.svg" . prettyText . renderDia SVG opts $
-        hlsWithHs & center & scaleY 1.5 & pad 1.1 & lw 0
+main = do
+    p <-
+        startProcess $
+            proc "svgo" ["-i", "-", "-o", "out.svg", "--pretty", "--multipass"]
+                `setStdin` CreatePipe `setStdout` CreatePipe
+    BS.hPut (processStdin p) . renderBS . renderDia SVG opts $ hlsWithHs & center & scaleY 1.5 & pad 1.1 & lw 0
+    hClose $ processStdin p
+    BS.putStrLn =<< BS.hGetContents (processStdout p)
   where
     opts =
         SVGOptions
             { _size = mkSizeSpec $ V2 (Just 1000) Nothing
             , _svgDefinitions = Nothing
             , _idPrefix = ""
-            , _svgAttributes = [makeAttribute "shape-rendering" "crispEdges"]
+            , _svgAttributes = []
             , _generateDoctype = True
             }
 
