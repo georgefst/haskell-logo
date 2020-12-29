@@ -1,20 +1,33 @@
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE NoMonomorphismRestriction #-}
 {-# OPTIONS_GHC -Wall #-}
 
 module Main (main) where
 
+import qualified Data.Text.Lazy.IO as TL
 import Diagrams.Backend.SVG
-import Diagrams.Backend.SVG.CmdLine
 import Diagrams.Prelude
+import Graphics.Svg (makeAttribute, prettyText)
 
 {- TODO
 turn in to cabal script
     for now:
-        cabal install --package-env . --allow-newer='*:base' --lib diagrams-lib diagrams-core diagrams-svg
+        cabal install --package-env . --allow-newer='*:base' --lib diagrams-lib diagrams-core diagrams-svg svg-builder
 -}
 
 main :: IO ()
-main = mainWith $ d & center & pad 1.1
+main =
+    TL.writeFile "out.svg" . prettyText . renderDia SVG opts $
+        d & center & pad 1.1
+  where
+    opts =
+        SVGOptions
+            { _size = mkSizeSpec $ V2 (Just 1000) Nothing
+            , _svgDefinitions = Nothing
+            , _idPrefix = ""
+            , _svgAttributes = [makeAttribute "shape-rendering" "crispEdges"]
+            , _generateDoctype = True
+            }
 
 d :: Diagram B
 d =
@@ -24,16 +37,8 @@ d =
             , scale (1 / 6) $ center hs
             )
         ,
-            ( p2 (115, -60)
-            , polygonFromCoords
-                purple2
-                [ (0, 0)
-                , (40, 60)
-                , (90, 0)
-                , (130, -60)
-                , (90, -120)
-                , (40, -60)
-                ]
+            ( p2 (160, -60)
+            , reflectY $ diagonal 40 purple2
             )
         ,
             ( p2 (115, -60)
