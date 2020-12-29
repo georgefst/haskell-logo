@@ -5,17 +5,19 @@
 
 module Main (main) where
 
-import qualified Data.ByteString.Lazy.Char8 as BS
+import Control.Monad
+import qualified Data.ByteString.Char8 as BS
+import qualified Data.ByteString.Lazy.Char8 as BSL
 import Diagrams.Backend.SVG
 import Diagrams.Prelude
 import Graphics.Svg (renderBS)
-import RawFilePath.Process
-import System.IO
+import System.Exit
+import System.Process.ByteString
 
 {- TODO
 turn in to cabal script
     for now:
-        cabal install --package-env . --allow-newer='*:base' --lib diagrams-lib diagrams-core diagrams-svg svg-builder
+        cabal install --package-env . --allow-newer='*:base' --lib diagrams-lib diagrams-core diagrams-svg svg-builder process-extras
 less use of absolute positions for 'hs'
 crispEdges
     possible for perfect horizontal/vertical lines only?
@@ -39,13 +41,13 @@ crispEdges
 
 main :: IO ()
 main = do
-    p <-
-        startProcess $
-            proc "svgo" ["-i", "-", "-o", "out.svg", "--pretty", "--multipass"]
-                `setStdin` CreatePipe `setStdout` CreatePipe
-    BS.hPut (processStdin p) . renderBS . renderDia SVG opts $ hlsWithHs & center & scaleY 1.5 & pad 1.1 & lw 0
-    hClose $ processStdin p
-    BS.putStrLn =<< BS.hGetContents (processStdout p)
+    (c, o, e) <-
+        readProcessWithExitCode
+            "svgo"
+            ["-i", "-", "-o", "out.svg", "--pretty", "--multipass"]
+            (BSL.toStrict . renderBS . renderDia SVG opts $ hlsWithHs & center & scaleY 1.5 & pad 1.1 & lw 0)
+    BS.putStrLn o
+    when (c /= ExitSuccess) $ BS.putStrLn e
   where
     opts =
         SVGOptions
