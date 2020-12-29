@@ -22,6 +22,7 @@ crispEdges
         align to pixels
             https://stackoverflow.com/questions/23376308/avoiding-lines-between-adjecent-svg-rectangles
         lw /= 0
+        write post-processing tool to merge adjacent shapes with same attributes (at least colour)
     why does diagrams.keyVal work for "class" but not "shape-rendering"?
         means we can only apply "crisp-edges" globally
 -}
