@@ -37,6 +37,26 @@ d =
             , scale (1 / 6) $ center hs
             )
         ,
+            ( p2 (120, 0)
+            , reflectX $ diagonal 120 & fc purple0
+            )
+        ,
+            ( p2 (125, 40)
+            , reflectX $ horizontal 210 & fc purple0
+            )
+        ,
+            ( 0
+            , reflectX $ diagonal 120 & fc purple0
+            )
+        ,
+            ( p2 (-165, -120)
+            , horizontal 200 & fc purple1
+            )
+        ,
+            ( 0
+            , reflectX $ reflectY $ diagonal 120 & fc purple1
+            )
+        ,
             ( p2 (160, -40)
             , reflectY $ diagonal 40 & fc purple2
             )
@@ -47,26 +67,6 @@ d =
         ,
             ( p2 (35, -120)
             , horizontal 170 & fc purple2
-            )
-        ,
-            ( p2 (125, 40)
-            , reflectX $ horizontal 210 & fc purple0
-            )
-        ,
-            ( p2 (-165, -120)
-            , horizontal 200 & fc purple1
-            )
-        ,
-            ( 0
-            , reflectX $ diagonal 120 & fc purple0
-            )
-        ,
-            ( 0
-            , reflectX $ reflectY $ diagonal 120 & fc purple1
-            )
-        ,
-            ( p2 (120, 0)
-            , reflectX $ diagonal 120 & fc purple0
             )
         ]
 
