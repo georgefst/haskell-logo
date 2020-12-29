@@ -18,7 +18,7 @@ turn in to cabal script
 main :: IO ()
 main =
     TL.writeFile "out.svg" . prettyText . renderDia SVG opts $
-        d & center & scaleY 1.5 & pad 1.1
+        d & center & scaleY 1.5 & pad 1.1 & lw 0
   where
     opts =
         SVGOptions
@@ -38,32 +38,35 @@ d =
             )
         ,
             ( p2 (160, -40)
-            , reflectY $ diagonal 40 purple2
+            , reflectY $ diagonal 40 & fc purple2
             )
         ,
             ( p2 (115, -40)
-            , horizontal 170 purple2
+            , horizontal 170 & fc purple2
             )
         ,
             ( p2 (35, -120)
-            , horizontal 170 purple2
+            , horizontal 170 & fc purple2
             )
         ,
             ( p2 (125, 40)
-            , reflectX $ horizontal 210 purple0
+            , reflectX $ horizontal 210 & fc purple0
             )
         ,
             ( p2 (-165, -120)
-            , horizontal 200 purple1
+            , horizontal 200 & fc purple1
             )
         ,
-            ( p2 (0, 0)
-            , reflectX (diagonal 120 purple0)
-                === reflectX (reflectY (diagonal 120 purple1))
+            ( 0
+            , reflectX $ diagonal 120 & fc purple0
+            )
+        ,
+            ( 0
+            , reflectX $ reflectY $ diagonal 120 & fc purple1
             )
         ,
             ( p2 (120, 0)
-            , reflectX (diagonal 120 purple0)
+            , reflectX $ diagonal 120 & fc purple0
             )
         ]
 
@@ -72,62 +75,57 @@ hs =
     position
         [
             ( p2 (0, 0)
-            , reflectX (diagonal 120 grey0)
-                === reflectX (reflectY (diagonal 120 grey0))
+            , reflectX (diagonal 120) === reflectX (reflectY (diagonal 120))
+                & fc grey0
             )
         ,
             ( p2 (120, 0)
-            , reflectX (diagonal 120 grey1)
-                === ( reflectY (diagonal 120 grey1)
-                        <> reflectX (reflectY (diagonal 120 grey1))
-                    )
+            , reflectX (diagonal 120) === (reflectY (diagonal 120) <> reflectX (reflectY (diagonal 120)))
+                & fc grey1
             )
         ,
             ( p2 (145, 50)
-            , reflectY $ horizontalChopped 200 grey2
+            , reflectY (horizontalChopped 200)
+                & fc grey2
             )
         ,
             ( p2 (205, -10)
-            , reflectY $ horizontalChopped 140 grey2
+            , reflectY (horizontalChopped 140)
+                & fc grey2
             )
         ]
 
-diagonal :: Double -> Colour Double -> Diagram B
-diagonal y c =
+diagonal :: Double -> Diagram B
+diagonal y =
     translate (V2 (-45) 0) $
         polygonFromCoords
-            c
             [ (0, 0)
             , (y, y)
             , (y + 90, y)
             , (90, 0)
             ]
 
-horizontalChopped :: Double -> Colour Double -> Diagram B
-horizontalChopped x c =
+horizontalChopped :: Double -> Diagram B
+horizontalChopped x =
     polygonFromCoords
-        c
         [ (0, 0)
         , (40, 40)
         , (x, 40)
         , (x, 0)
         ]
 
-horizontal :: Double -> Colour Double -> Diagram B
-horizontal x c =
+horizontal :: Double -> Diagram B
+horizontal x =
     polygonFromCoords
-        c
         [ (0, 0)
         , (40, 40)
         , (x + 40, 40)
         , (x, 0)
         ]
 
-polygonFromCoords :: Colour Double -> [(Double, Double)] -> Diagram B
-polygonFromCoords c =
-    fc c
-        . lw 0
-        . stroke
+polygonFromCoords :: [(Double, Double)] -> Diagram B
+polygonFromCoords =
+    stroke
         . closeLine
         . fromVertices
         . map p2
