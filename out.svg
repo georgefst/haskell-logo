@@ -1,13 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" height="734.694" font-size="1" width="1000" stroke="#000">
-    <path d="M517.007 483.302l12.368 18.553h30.922v-18.553zm-18.553-27.829l12.368 18.553h49.475v-18.553z" fill="#BBB" stroke="none"/>
-    <path d="M476.809 478.664l37.106 55.659h27.829l-37.106-55.659z" fill="#999" stroke="none"/>
-    <path d="M504.638 478.664l-37.106 55.659h-27.829l37.106-55.659zm0 0l-37.106-55.658h-27.829l37.106 55.658z" fill="#999" stroke="none"/>
-    <path d="M467.533 478.664l-37.106 55.659h-27.83l37.106-55.659zm0 0l-37.106-55.658h-27.83l37.106 55.658z" fill="#666" stroke="none"/>
-    <path d="M564.935 478.664l74.212-111.317h315.399l-74.212 111.317zm0 0l74.212 111.318h166.975l-74.211-111.318z" fill="#8F4E8B" stroke="none"/>
-    <path d="M416.512 701.299l74.212-111.318h315.399L731.91 701.3z" fill="#8F4E8B" stroke="none"/>
-    <path d="M45.455 701.299l222.634-333.952h166.976L212.43 701.299z" fill="#5E5086" stroke="none"/>
-    <path d="M45.455 701.299l74.211-111.318h371.058L416.512 701.3z" fill="#5E5086" stroke="none"/>
-    <path d="M435.065 367.347L212.43 33.395H45.455l222.634 333.952z" fill="#453A62" stroke="none"/>
-    <path d="M583.488 256.03l-74.212-111.318h-389.61l74.211 111.318z" fill="#453A62" stroke="none"/>
-    <path d="M657.7 367.347L435.064 33.395H268.089l222.634 333.952z" fill="#453A62" stroke="none"/>
+<?xml version='1.0' ?>
+<svg viewBox="0 0 1000 734.693878" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1000" height="734.6939">
+  <path stroke-width="0" stroke="#000000" fill="#453A62" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" fill-opacity="1" stroke-opacity="1" d="M657.6994,367.3469 L435.0649,33.3951 L268.089,33.3951 L490.7235,367.3469 Z" />
+  <path stroke-width="0" stroke="#000000" fill="#453A62" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" fill-opacity="1" stroke-opacity="1" d="M583.4879,256.0297 L509.2764,144.7124 L119.666,144.7124 L193.8775,256.0297 Z" />
+  <path stroke-width="0" stroke="#000000" fill="#453A62" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" fill-opacity="1" stroke-opacity="1" d="M435.0649,367.3469 L212.4304,33.3951 L45.4545,33.3951 L268.089,367.3469 Z" />
+  <path stroke-width="0" stroke="#000000" fill="#5E5086" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" fill-opacity="1" stroke-opacity="1" d="M45.4545,701.2987 L119.666,589.9814 L490.7235,589.9814 L416.512,701.2987 Z" />
+  <path stroke-width="0" stroke="#000000" fill="#5E5086" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" fill-opacity="1" stroke-opacity="1" d="M45.4545,701.2987 L268.089,367.3469 L435.0649,367.3469 L212.4304,701.2987 Z" />
+  <path stroke-width="0" stroke="#000000" fill="#666666" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" fill-opacity="1" stroke-opacity="1" d="M467.5325,478.6642 L430.4267,423.0056 L402.5974,423.0056 L439.7032,478.6642 L402.5974,534.3228 L430.4267,534.3228 Z" />
+  <path stroke-width="0" stroke="#000000" fill="#8F4E8B" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" fill-opacity="1" stroke-opacity="1" d="M564.9351,478.6642 L639.1466,589.9815 L490.7236,589.9814 L416.5121,701.2987 L731.911,701.2987 L806.1225,589.9814 L731.911,478.6642 L880.334,478.6642 L954.5455,367.3469 L639.1466,367.3469 Z" />
+  <path stroke-width="0" stroke="#000000" fill="#999999" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" fill-opacity="1" stroke-opacity="1" d="M504.6382,478.6642 L467.5324,423.0056 L439.7031,423.0056 L476.8089,478.6642 L439.7031,534.3228 L467.5324,534.3228 Z" />
+  <path stroke-width="0" stroke="#000000" fill="#999999" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" fill-opacity="1" stroke-opacity="1" d="M476.8089,478.6642 L513.9147,534.3228 L541.744,534.3228 L504.6382,478.6642 Z" />
+  <path stroke-width="0" stroke="#000000" fill="#BBBBBB" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" fill-opacity="1" stroke-opacity="1" d="M498.4539,455.4731 L510.8225,474.026 L560.2968,474.026 L560.2968,455.4731 Z" />
+  <path stroke-width="0" stroke="#000000" fill="#BBBBBB" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" fill-opacity="1" stroke-opacity="1" d="M517.0068,483.3024 L529.3754,501.8553 L560.2969,501.8553 L560.2969,483.3024 Z" />
+  <defs />
 </svg>

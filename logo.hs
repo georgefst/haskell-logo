@@ -4,64 +4,25 @@
 
 module Main (main) where
 
-import Control.Monad
-import qualified Data.ByteString.Char8 as BS
 import qualified Data.ByteString.Lazy.Char8 as BSL
+import Data.Text.Encoding (decodeUtf8)
 import Diagrams.Backend.SVG
 import Diagrams.Prelude
 import Graphics.Svg (renderBS)
-import System.Exit
-import System.Process.ByteString
+import Svgone
 
 {- TODO
 turn in to cabal script
     for now:
-        cabal install --package-env . --allow-newer='*:base' --lib diagrams-lib diagrams-core diagrams-svg svg-builder process-extras
+        cabal install --package-env . --allow-newer='*:base' --lib \
+            diagrams-lib diagrams-core diagrams-svg svg-builder svgone
 less use of absolute positions for 'hs'
-crispEdges
-    possible for perfect horizontal/vertical lines only?
-        https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/shape-rendering
-    workarounds
-        align to pixels
-            https://stackoverflow.com/questions/23376308/avoiding-lines-between-adjecent-svg-rectangles
-        lw /= 0
-        post-processing tool to merge adjacent shapes with same attributes (at least colour)
-            svgo
-                unmaintained (ish)
-                    https://github.com/svg/svgo/issues/1055
-                only really need 'mergePaths' and 'collapseGroups'
-                    https://github.com/svg/svgo/blob/master/docs/how-it-works/en.md#1-config
-                will not merge the bottom two elements of S
-                    probably worth opening about why this is and whether its an easy fix
-                        look at source
-                            https://github.com/svg/svgo/blob/master/plugins/mergePaths.js
-                            https://github.com/svg/svgo/blob/master/plugins/collapseGroups.js
-                            experiment with minimal config files (with `full: true`)
-                    happy with either of the other pairs
-                        including top and bottom...
-            svgcleaner
-                looks better architected and faster - but maintainer says "It's very broken. That's why it's abandoned."
-                not modular - can't disable some features
-                    seems to be a serious architectural issue
-                doesn't join paths: https://github.com/RazrFalcon/svgcleaner/issues/41
-            scour
-                most actively maintained
-                doesn't yet merge paths: https://github.com/scour-project/scour/issues/251
-            write own in Haskell?
-                could be very minimal subset of the above three
-    why does diagrams.keyVal work for "class" but not "shape-rendering"?
-        means we can only apply "crisp-edges" globally
 -}
 
 main :: IO ()
 main = do
-    (c, o, e) <-
-        readProcessWithExitCode
-            "svgo"
-            ["-i", "-", "-o", "out.svg", "--pretty", "--multipass"]
-            (BSL.toStrict . renderBS . renderDia SVG opts $ hlsWithHs & center & scaleY 1.5 & pad 1.1 & lw 0)
-    BS.putStrLn o
-    when (c /= ExitSuccess) $ BS.putStrLn e
+    let d = renderDia SVG opts $ hlsWithHs & center & scaleY 1.5 & pad 1.1 & lw 0
+    run allPluginsWithDefaults "" (decodeUtf8 . BSL.toStrict $ renderBS d) "out.svg"
   where
     opts =
         SVGOptions
