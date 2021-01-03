@@ -21,8 +21,9 @@ less use of absolute positions for 'hs'
 
 main :: IO ()
 main = do
-    let d = renderDia SVG opts $ hlsWithHs & center & scaleY 1.5 & pad 1.1 & lw 0
-    run allPluginsWithDefaults "" (decodeUtf8 . BSL.toStrict $ renderBS d) "out.svg"
+    let d = renderBS . renderDia SVG opts $ hlsWithHs & center & scaleY 1.5 & pad 1.1 & lw 0
+    -- BSL.writeFile "out-raw.svg" d
+    run allPluginsWithDefaults "" (decodeUtf8 $ BSL.toStrict d) "out.svg"
   where
     opts =
         SVGOptions
