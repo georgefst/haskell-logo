@@ -3,6 +3,25 @@
 {-# LANGUAGE NoMonomorphismRestriction #-}
 {-# OPTIONS_GHC -Wall #-}
 
+{- cabal:
+build-depends:
+    base >= 4.16,
+    bytestring,
+    diagrams-core,
+    diagrams-lib,
+    diagrams-svg,
+    svg-builder,
+    svgone,
+    text,
+-}
+{- project:
+allow-newer:
+    reanimate-svg:mtl,
+    reanimate-svg:transformers,
+package reanimate-svg
+    ghc-options: -fsimpl-tick-factor=1000
+-}
+
 module Main where
 
 import Data.ByteString.Lazy.Char8 qualified as BSL
@@ -11,14 +30,6 @@ import Diagrams.Backend.SVG
 import Diagrams.Prelude
 import Graphics.Svg (renderBS)
 import Svgone qualified
-
-{- TODO
-turn in to cabal script
-    for now:
-        cabal install --package-env . --allow-newer='*:base' --lib \
-            diagrams-lib diagrams-core diagrams-svg svg-builder svgone
-less use of absolute positions
--}
 
 main :: IO ()
 main = do
@@ -35,6 +46,7 @@ main = do
             , _generateDoctype = True
             }
 
+-- TODO less use of absolute positions
 hs :: Diagram B
 hs =
     position
