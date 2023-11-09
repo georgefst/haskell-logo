@@ -55,10 +55,9 @@ diag =
 roundel :: Diagram B
 roundel =
     mconcat
-        [ rect 246.5 40 & fc (sRGB24read "#000f9f")
-        , annularWedge 100 64.5 xDir (1 @@ turn) & fc (sRGB24read "#e1251b")
+        [ rect 370 60 & fc (sRGB24read "#000f9f")
+        , annularWedge 150 97 xDir (1 @@ turn) & fc (sRGB24read "#e1251b")
         ]
-        & scale 1.5
 
 hs :: Diagram B
 hs =
