@@ -47,19 +47,18 @@ main = do
             , _generateDoctype = True
             }
 
--- TODO less use of absolute positions
 hs :: Diagram B
 hs =
     position
         [
-            ( p2 (-45, 0)
+            ( p2 (-120, 0)
             , reflectX (diagonal 120)
                 === reflectX (reflectY (diagonal 120))
                 & fc purple0
                 & skew
             )
         ,
-            ( p2 (75, 0)
+            ( p2 (0, 0)
             , reflectX (diagonal 120)
                 === ( (diagonal 120 & reflectY & reflectX)
                         <> (diagonal 120 & reflectY)
@@ -68,13 +67,13 @@ hs =
                 & skew
             )
         ,
-            ( p2 (120, 45)
+            ( p2 (45, 45)
             , reflectY (horizontalChopped 200)
                 & fc purple2
                 & skew
             )
         ,
-            ( p2 (180, -45)
+            ( p2 (105, -45)
             , reflectY (horizontalChopped 140)
                 & fc purple2
                 & skew
