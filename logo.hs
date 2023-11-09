@@ -1,4 +1,5 @@
 {-# LANGUAGE GHC2021 #-}
+{-# LANGUAGE LexicalNegation #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE NoMonomorphismRestriction #-}
 {-# OPTIONS_GHC -Wall #-}
@@ -51,29 +52,29 @@ hs :: Diagram B
 hs =
     position
         [
-            ( p2 (0, 0)
+            ( p2 (-45, 0)
             , reflectX (diagonal 120)
                 === reflectX (reflectY (diagonal 120))
                 & fc purple0
                 & skew
             )
         ,
-            ( p2 (120, 0)
+            ( p2 (75, 0)
             , reflectX (diagonal 120)
                 === ( (diagonal 120 & reflectY & reflectX)
-                        <> (diagonal 120 & reflectY & snugR)
+                        <> (diagonal 120 & reflectY)
                     )
                 & fc purple1
                 & skew
             )
         ,
-            ( p2 (100, 75)
+            ( p2 (120, 45)
             , reflectY (horizontalChopped 200)
                 & fc purple2
                 & skew
             )
         ,
-            ( p2 (160, -15)
+            ( p2 (180, -45)
             , reflectY (horizontalChopped 140)
                 & fc purple2
                 & skew
@@ -90,6 +91,7 @@ diagonal y =
         , (y + 90, y)
         , (90, 0)
         ]
+        & translateX -45
 
 horizontalChopped :: Double -> Diagram B
 horizontalChopped x =
@@ -99,6 +101,8 @@ horizontalChopped x =
         , (x, 40)
         , (x, 0)
         ]
+        & centerY
+        & snugL
 
 polygonFromCoords :: [(Double, Double)] -> Diagram B
 polygonFromCoords =
