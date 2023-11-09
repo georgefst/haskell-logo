@@ -49,18 +49,6 @@ main = do
 
 diag :: Diagram B
 diag =
-    hs
-        ||| (roundel & translateY 45)
-
-roundel :: Diagram B
-roundel =
-    mconcat
-        [ rect 370 60 & fc (sRGB24read "#000f9f")
-        , annularWedge 150 97 xDir (1 @@ turn) & fc (sRGB24read "#e1251b")
-        ]
-
-hs :: Diagram B
-hs =
     hcat'
         (def & catMethod .~ Distrib & sep .~ 80)
         [ reflectX (diagonal 120)
@@ -74,19 +62,25 @@ hs =
                 )
             & fc purple1
             & skew
-        , vsep
-            30
-            [ reflectY (horizontalChopped 200)
-                & fc purple2
-                & skew
-            , reflectY (horizontalChopped 140)
+        , vcat'
+            (def & catMethod .~ Distrib & sep .~ 90)
+            [ mconcat
+                [ reflectY (horizontalChopped (200 + tubeExtension))
+                    & fc (sRGB24read "#000f9f")
+                    & skew
+                , annularWedge 150 97 xDir (1 @@ turn)
+                    & fc (sRGB24read "#e1251b")
+                    & translateX -tubeExtension
+                ]
+            , reflectY (horizontalChopped (140 + tubeExtension))
                 & fc purple2
                 & skew
             ]
-            & centerY
-            & translateX 140
+            & translateY 45
+            & translateX (140 + tubeExtension)
         ]
   where
+    tubeExtension = 170
     skew = scaleY 1.5
 
 diagonal :: Double -> Diagram B
