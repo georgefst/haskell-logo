@@ -40,7 +40,8 @@ hs =
     position
         [
             ( p2 (0, 0)
-            , reflectX (diagonal 120) === reflectX (reflectY (diagonal 120))
+            , reflectX (diagonal 120)
+                === reflectX (reflectY (diagonal 120))
                 & fc purple0
             )
         ,
