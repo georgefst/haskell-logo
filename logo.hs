@@ -33,7 +33,7 @@ import Svgone qualified
 
 main :: IO ()
 main = do
-    let d = renderBS . renderDia SVG opts $ hs & center & scaleY 1.5 & pad 1.1 & lw 0
+    let d = renderBS . renderDia SVG opts $ hs & center & pad 1.1 & lw 0
     BSL.writeFile "out-raw.svg" d
     Svgone.run Svgone.allPluginsWithDefaults "" (decodeUtf8 $ BSL.toStrict d) "out.svg"
   where
@@ -55,6 +55,7 @@ hs =
             , reflectX (diagonal 120)
                 === reflectX (reflectY (diagonal 120))
                 & fc purple0
+                & skew
             )
         ,
             ( p2 (120, 0)
@@ -63,18 +64,23 @@ hs =
                         <> (diagonal 120 & reflectY & snugR)
                     )
                 & fc purple1
+                & skew
             )
         ,
-            ( p2 (100, 50)
+            ( p2 (100, 75)
             , reflectY (horizontalChopped 200)
                 & fc purple2
+                & skew
             )
         ,
-            ( p2 (160, -10)
+            ( p2 (160, -15)
             , reflectY (horizontalChopped 140)
                 & fc purple2
+                & skew
             )
         ]
+  where
+    skew = scaleY 1.5
 
 diagonal :: Double -> Diagram B
 diagonal y =
