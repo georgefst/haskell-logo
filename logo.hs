@@ -22,7 +22,7 @@ package reanimate-svg
     ghc-options: -fsimpl-tick-factor=1000
 -}
 
-module Main where
+module Main (main) where
 
 import Data.ByteString.Lazy.Char8 qualified as BSL
 import Data.Text.Encoding (decodeUtf8)
@@ -91,15 +91,6 @@ horizontalChopped x =
         [ (0, 0)
         , (40, 40)
         , (x, 40)
-        , (x, 0)
-        ]
-
-horizontal :: Double -> Diagram B
-horizontal x =
-    polygonFromCoords
-        [ (0, 0)
-        , (40, 40)
-        , (x + 40, 40)
         , (x, 0)
         ]
 
