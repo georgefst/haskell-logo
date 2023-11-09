@@ -65,22 +65,23 @@ diag =
         , vcat'
             (def & catMethod .~ Distrib & sep .~ 90)
             [ mconcat
-                [ reflectY (horizontalChopped (200 + tubeExtension))
+                [ reflectY (horizontalChopped (200 + tubeExtension + tubeLeftPad))
                     & fc (sRGB24read "#000f9f")
                     & skew
                 , annularWedge 150 97 xDir (1 @@ turn)
                     & fc (sRGB24read "#e1251b")
                     & translateX -tubeExtension
                 ]
-            , reflectY (horizontalChopped (140 + tubeExtension))
+            , reflectY (horizontalChopped (140 + tubeExtension + tubeLeftPad))
                 & fc purple2
                 & skew
             ]
             & translateY 45
-            & translateX (140 + tubeExtension)
+            & translateX (140 + tubeExtension + tubeLeftPad)
         ]
   where
-    tubeExtension = 170
+    tubeExtension = 170 -- necessary - ensures roundel fits while having correct overhang on right
+    tubeLeftPad = 25 -- arbitrary - purely a matter of aesthetic judgement
     skew = scaleY 1.5
 
 diagonal :: Double -> Diagram B
