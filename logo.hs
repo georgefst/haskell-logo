@@ -49,36 +49,30 @@ main = do
 
 hs :: Diagram B
 hs =
-    position
-        [
-            ( p2 (-120, 0)
-            , reflectX (diagonal 120)
-                === reflectX (reflectY (diagonal 120))
-                & fc purple0
+    hcat'
+        (def & catMethod .~ Distrib & sep .~ 80)
+        [ reflectX (diagonal 120)
+            === reflectX (reflectY (diagonal 120))
+            & fc purple0
+            & skew
+            & snugR
+        , reflectX (diagonal 120)
+            === ( (diagonal 120 & reflectY & reflectX)
+                    <> (diagonal 120 & reflectY)
+                )
+            & fc purple1
+            & skew
+        , vsep
+            30
+            [ reflectY (horizontalChopped 200)
+                & fc purple2
                 & skew
-            )
-        ,
-            ( p2 (0, 0)
-            , reflectX (diagonal 120)
-                === ( (diagonal 120 & reflectY & reflectX)
-                        <> (diagonal 120 & reflectY)
-                    )
-                & fc purple1
+            , reflectY (horizontalChopped 140)
+                & fc purple2
                 & skew
-            )
-        ,
-            ( p2 (225, 0)
-            , vsep
-                30
-                [ reflectY (horizontalChopped 200)
-                    & fc purple2
-                    & skew
-                , reflectY (horizontalChopped 140)
-                    & fc purple2
-                    & skew
-                ]
-                & centerY
-            )
+            ]
+            & centerY
+            & translateX 140
         ]
   where
     skew = scaleY 1.5
