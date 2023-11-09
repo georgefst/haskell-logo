@@ -34,7 +34,7 @@ import Svgone qualified
 
 main :: IO ()
 main = do
-    let d = renderBS . renderDia SVG opts $ hs & center & pad 1.1 & lw 0
+    let d = renderBS . renderDia SVG opts $ diag & center & pad 1.1 & lw 0
     BSL.writeFile "out-raw.svg" d
     Svgone.run Svgone.allPluginsWithDefaults "" (decodeUtf8 $ BSL.toStrict d) "out.svg"
   where
@@ -46,6 +46,19 @@ main = do
             , _svgAttributes = []
             , _generateDoctype = True
             }
+
+diag :: Diagram B
+diag =
+    hs
+        ||| (roundel & translateY 45)
+
+roundel :: Diagram B
+roundel =
+    mconcat
+        [ rect 246.5 40 & fc (sRGB24read "#000f9f")
+        , annularWedge 100 64.5 xDir (1 @@ turn) & fc (sRGB24read "#e1251b")
+        ]
+        & scale 1.5
 
 hs :: Diagram B
 hs =
