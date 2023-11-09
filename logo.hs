@@ -67,16 +67,17 @@ hs =
                 & skew
             )
         ,
-            ( p2 (45, 45)
-            , reflectY (horizontalChopped 200)
-                & fc purple2
-                & skew
-            )
-        ,
-            ( p2 (105, -45)
-            , reflectY (horizontalChopped 140)
-                & fc purple2
-                & skew
+            ( p2 (225, 0)
+            , vsep
+                30
+                [ reflectY (horizontalChopped 200)
+                    & fc purple2
+                    & skew
+                , reflectY (horizontalChopped 140)
+                    & fc purple2
+                    & skew
+                ]
+                & centerY
             )
         ]
   where
@@ -101,7 +102,7 @@ horizontalChopped x =
         , (x, 0)
         ]
         & centerY
-        & snugL
+        & snugR
 
 polygonFromCoords :: [(Double, Double)] -> Diagram B
 polygonFromCoords =
