@@ -81,10 +81,10 @@ diag =
                     -- although they struggle with loading the custom font in the first place
                     -- & translateY -12
                 , reflectY (horizontalChopped (200 + tubeExtension + tubeLeftPad))
-                    & fc (sRGB24read "#000f9f")
+                    & fc purple2
                     & skew
                 , annularWedge 150 97 xDir (1 @@ turn)
-                    & fc (sRGB24read "#e1251b")
+                    & fc purple0
                     & translateX -tubeExtension
                 ]
             , reflectY (horizontalChopped (140 + tubeExtension + tubeLeftPad))
