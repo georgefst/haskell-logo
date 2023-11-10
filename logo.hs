@@ -26,7 +26,9 @@ package reanimate-svg
 module Main (main) where
 
 import Data.ByteString.Lazy.Char8 qualified as BSL
+import Data.Text qualified as T
 import Data.Text.Encoding (decodeUtf8)
+import Data.Text.IO qualified as T
 import Diagrams.Backend.SVG
 import Diagrams.Prelude
 import Graphics.Svg (renderBS)
@@ -35,7 +37,10 @@ import Svgone qualified
 main :: IO ()
 main = do
     let d = renderBS . renderDia SVG opts $ diag & center & pad 1.1 & lw 0
-    BSL.writeFile "out-raw.svg" d
+    T.writeFile "out-raw.svg" $
+        -- TODO this is a hack, obviously
+        T.intercalate "<defs><style type='text/css'>@font-face {font-family: johnston;src: url('new-johnston-medium-4.ttf');}</style></defs>" . T.splitOn "<defs></defs>" $
+            decodeUtf8 (BSL.toStrict d)
     Svgone.run Svgone.allPluginsWithDefaults "" (decodeUtf8 $ BSL.toStrict d) "out.svg"
   where
     opts =
@@ -65,7 +70,17 @@ diag =
         , vcat'
             (def & catMethod .~ Distrib & sep .~ 90)
             [ mconcat
-                [ reflectY (horizontalChopped (200 + tubeExtension + tubeLeftPad))
+                [ text "LONDON HASKELL"
+                    & font "johnston"
+                    & fc white
+                    -- these remaining values are based on imprecise aesthetic judgements
+                    & translateX -4.5
+                    & scale 41
+                    & translateY -3 --
+                    -- above is optimised for Firefox, but this is needed in addition for eog/rsvg
+                    -- although they struggle with loading the custom font in the first place
+                    -- & translateY -12
+                , reflectY (horizontalChopped (200 + tubeExtension + tubeLeftPad))
                     & fc (sRGB24read "#000f9f")
                     & skew
                 , annularWedge 150 97 xDir (1 @@ turn)
