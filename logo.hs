@@ -19,6 +19,7 @@ build-depends:
 allow-newer:
     reanimate-svg:mtl,
     reanimate-svg:transformers,
+    svgone:*,
 package reanimate-svg
     ghc-options: -fsimpl-tick-factor=1000
 -}
