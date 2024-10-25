@@ -1,4 +1,5 @@
 {-# LANGUAGE GHC2021 #-}
+{-# LANGUAGE BlockArguments #-}
 {-# LANGUAGE LexicalNegation #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE NoMonomorphismRestriction #-}
@@ -29,6 +30,7 @@ package reanimate-svg
 module Main (main) where
 
 import Data.ByteString.Lazy.Char8 qualified as BSL
+import Data.Foldable
 import Data.Text.Encoding (decodeUtf8)
 import Diagrams.Backend.SVG
 import Diagrams.Prelude hiding (arrow)
@@ -37,9 +39,10 @@ import Svgone qualified
 
 main :: IO ()
 main = do
-    let d = renderBS . renderDia SVG opts $ hs & scaleY 1.5 & center & pad 1.1 & lw 0
-    BSL.writeFile "out-raw.svg" d
-    Svgone.run Svgone.allPluginsWithDefaults "" (decodeUtf8 $ BSL.toStrict d) "out.svg"
+    for_ [(hs, "out", Just "out-raw"), (survey, "survey", Nothing)] \(d, name, nameRaw) -> do
+        let d' = renderBS . renderDia SVG opts $ d & scaleY 1.5 & center & pad 1.1 & lw 0
+        Svgone.run Svgone.allPluginsWithDefaults "" (decodeUtf8 $ BSL.toStrict d') $ name <> ".svg"
+        maybe mempty (flip BSL.writeFile d' . (<> ".svg")) nameRaw
   where
     opts =
         SVGOptions
@@ -57,6 +60,15 @@ hs =
         [ arrow
         , lambda
         , equals
+        ]
+
+survey :: Diagram B
+survey =
+    hcat'
+        (def & catMethod .~ Distrib & sep .~ 80)
+        [ arrow
+        , lambda
+        , checkbox
         ]
 
 arrow :: Diagram B
@@ -85,6 +97,19 @@ equals =
             ]
             & centerY
             & translateX 150 -- TODO something more principled (`snugL` should work but envelope isn't tight enough)
+
+checkbox :: Diagram B
+checkbox =
+        mconcat
+            [ ( (diagonal 120 & translateY -30)
+                    <> (diagonal 60 & centerY & reflectX)
+              )
+                & translateX -85
+                & fc purple0
+            , reflectY (horizontalChopped' 100 250)
+                & fc purple2
+            ]
+            & translateX 200 -- TODO something more principled (`snugL` should work but envelope isn't tight enough)
 
 diagonal :: Double -> Diagram B
 diagonal = diagonal' 90
