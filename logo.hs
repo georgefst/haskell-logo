@@ -102,7 +102,7 @@ checkbox :: Diagram B
 checkbox =
         let sf = 55 / 90 -- intended to look consistent with other line widths of 35 and 90
            in mconcat
-                [ ( (diagonal 180 & translateY (-75 / 2))
+                [ ( (diagonal 175 & translateY (-75 / 2))
                         <> (diagonal 75 & centerY & reflectX)
                   )
                     & translateX -135
