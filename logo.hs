@@ -65,17 +65,18 @@ hs =
                 )
             & fc purple1
             & skew
-        , vsep
-            30
-            [ reflectY (horizontalChopped 200)
-                & fc purple2
+        , mconcat
+            [ ( (diagonal 120 & translateY -30)
+                    <> (diagonal 60 & centerY & reflectX)
+              )
+                & translateX -85
+                & fc purple0
                 & skew
-            , reflectY (horizontalChopped 140)
+            , reflectY (horizontalChopped 250)
                 & fc purple2
                 & skew
             ]
-            & centerY
-            & translateX 150 -- TODO something more principled (`snugL` should work but envelope isn't tight enough)
+            & translateX 200 -- TODO something more principled (`snugL` should work but envelope isn't tight enough)
         ]
   where
     skew = scaleY 1.5
@@ -94,8 +95,8 @@ horizontalChopped :: Double -> Diagram B
 horizontalChopped x =
     polygonFromCoords
         [ (0, 0)
-        , (40, 40)
-        , (x, 40)
+        , (100, 100)
+        , (x, 100)
         , (x, 0)
         ]
         & centerY
