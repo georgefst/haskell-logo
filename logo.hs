@@ -63,16 +63,18 @@ hs =
                     <> (diagonal 120 & reflectY)
                 )
             & fc purple1
-        , mconcat
-            [ ( (diagonal 120 & translateY -30)
-                    <> (diagonal 60 & centerY & reflectX)
-              )
-                & translateX -85
-                & fc purple0
-            , reflectY (horizontalChopped 250)
-                & fc purple2
-            ]
-            & translateX 200 -- TODO something more principled (`snugL` should work but envelope isn't tight enough)
+        , let sf = 55 / 90 -- intended to look consistent with other line widths of 35 and 90
+           in mconcat
+                [ ( (diagonal 180 & translateY (-75 / 2))
+                        <> (diagonal 75 & centerY & reflectX)
+                  )
+                    & translateX -135
+                    & scale sf
+                    & fc purple0
+                    , reflectY (horizontalChopped (390 * sf))
+                    & fc purple2
+                    ]
+                & translateX (390 * sf - 50) -- TODO something more principled (`snugL` should work but envelope isn't tight enough)
         ]
         & scaleY 1.5
 
