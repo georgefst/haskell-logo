@@ -16,12 +16,14 @@ build-depends:
     text,
 -}
 {- project:
+-- TODO my package - will be updated imminently
+allow-newer: svgone:*,
+-- TODO https://github.com/reanimate/reanimate-svg/pull/45
 allow-newer:
     reanimate-svg:mtl,
     reanimate-svg:transformers,
-    svgone:*,
 package reanimate-svg
-    ghc-options: -fsimpl-tick-factor=1000
+    ghc-options: -fsimpl-tick-factor=300
 -}
 
 module Main (main) where
