@@ -63,37 +63,49 @@ hs =
                     <> (diagonal 120 & reflectY)
                 )
             & fc purple1
-        , let sf = 55 / 90 -- intended to look consistent with other line widths of 35 and 90
-           in mconcat
-                [ ( (diagonal 175 & translateY (-75 / 2))
-                        <> (diagonal 75 & centerY & reflectX)
-                  )
-                    & translateX -135
-                    & scale sf
-                    & fc purple0
-                    , reflectY (horizontalChopped (390 * sf))
-                    & fc purple2
+        , let
+            boxHeight = 100 -- matches the combined height of the lines in the original logo
+            tickWidth = 55 -- consistent with current diagonal line widths of 35 and 90
+            (tickHeightL, tickHeightR) = (75, 175) & both %~ (* (tickWidth / 90)) -- arbitrary, looks good
+            gapX = tickWidth -- doesn't have to be equal, but it looks about right
+           in
+            mconcat
+                [ composeAligned
+                    snugB
+                    mconcat
+                    [ diagonal' tickWidth tickHeightL & reflectX & centerY
+                    , diagonal' tickWidth tickHeightR
                     ]
-                & translateX (390 * sf - 50) -- TODO something more principled (`snugL` should work but envelope isn't tight enough)
+                    & snugL
+                    & translateX gapX
+                    & fc purple0
+                , reflectY (horizontalChopped' boxHeight (tickWidth + gapX * 2 + (boxHeight + tickHeightL) / 2))
+                    & fc purple2
+                    & snugL
+                ]
         ]
         & scaleY 1.5
 
 diagonal :: Double -> Diagram B
-diagonal y =
+diagonal = diagonal' 90
+diagonal' :: Double -> Double -> Diagram B
+diagonal' h y =
     polygonFromCoords
         [ (0, 0)
         , (y, y)
-        , (y + 90, y)
-        , (90, 0)
+        , (y + h, y)
+        , (h, 0)
         ]
-        & translateX -45
+        & translateX -(h / 2)
 
-horizontalChopped :: Double -> Diagram B
-horizontalChopped x =
+-- horizontalChopped :: Double -> Diagram B
+-- horizontalChopped = horizontalChopped' 40
+horizontalChopped' :: Double -> Double -> Diagram B
+horizontalChopped' h x =
     polygonFromCoords
         [ (0, 0)
-        , (100, 100)
-        , (x, 100)
+        , (h, h)
+        , (x, h)
         , (x, 0)
         ]
         & centerY
