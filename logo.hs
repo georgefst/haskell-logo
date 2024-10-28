@@ -31,13 +31,13 @@ module Main (main) where
 import Data.ByteString.Lazy.Char8 qualified as BSL
 import Data.Text.Encoding (decodeUtf8)
 import Diagrams.Backend.SVG
-import Diagrams.Prelude
+import Diagrams.Prelude hiding (arrow)
 import Graphics.Svg (renderBS)
 import Svgone qualified
 
 main :: IO ()
 main = do
-    let d = renderBS . renderDia SVG opts $ hs & center & pad 1.1 & lw 0
+    let d = renderBS . renderDia SVG opts $ hs & scaleY 1.5 & center & pad 1.1 & lw 0
     BSL.writeFile "out-raw.svg" d
     Svgone.run Svgone.allPluginsWithDefaults "" (decodeUtf8 $ BSL.toStrict d) "out.svg"
   where
@@ -54,16 +54,29 @@ hs :: Diagram B
 hs =
     hcat'
         (def & catMethod .~ Distrib & sep .~ 80)
-        [ reflectX (diagonal 120)
+        [ arrow
+        , lambda
+        , equals
+        ]
+
+arrow :: Diagram B
+arrow =
+        reflectX (diagonal 120)
             === reflectX (reflectY (diagonal 120))
             & fc purple0
             & snugR
-        , reflectX (diagonal 120)
+
+lambda :: Diagram B
+lambda =
+        reflectX (diagonal 120)
             === ( (diagonal 120 & reflectY & reflectX)
                     <> (diagonal 120 & reflectY)
                 )
             & fc purple1
-        , vsep
+
+equals :: Diagram B
+equals =
+        vsep
             20
             [ reflectY (horizontalChopped 200)
                 & fc purple2
@@ -72,8 +85,6 @@ hs =
             ]
             & centerY
             & translateX 150 -- TODO something more principled (`snugL` should work but envelope isn't tight enough)
-        ]
-        & scaleY 1.5
 
 diagonal :: Double -> Diagram B
 diagonal = diagonal' 90
