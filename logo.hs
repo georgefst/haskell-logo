@@ -57,28 +57,23 @@ hs =
         [ reflectX (diagonal 120)
             === reflectX (reflectY (diagonal 120))
             & fc purple0
-            & skew
             & snugR
         , reflectX (diagonal 120)
             === ( (diagonal 120 & reflectY & reflectX)
                     <> (diagonal 120 & reflectY)
                 )
             & fc purple1
-            & skew
         , vsep
-            30
+            20
             [ reflectY (horizontalChopped 200)
                 & fc purple2
-                & skew
             , reflectY (horizontalChopped 140)
                 & fc purple2
-                & skew
             ]
             & centerY
             & translateX 150 -- TODO something more principled (`snugL` should work but envelope isn't tight enough)
         ]
-  where
-    skew = scaleY 1.5
+        & scaleY 1.5
 
 diagonal :: Double -> Diagram B
 diagonal y =
