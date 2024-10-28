@@ -76,21 +76,25 @@ hs =
         & scaleY 1.5
 
 diagonal :: Double -> Diagram B
-diagonal y =
+diagonal = diagonal' 90
+diagonal' :: Double -> Double -> Diagram B
+diagonal' h y =
     polygonFromCoords
         [ (0, 0)
         , (y, y)
-        , (y + 90, y)
-        , (90, 0)
+        , (y + h, y)
+        , (h, 0)
         ]
-        & translateX -45
+        & translateX -(h / 2)
 
 horizontalChopped :: Double -> Diagram B
-horizontalChopped x =
+horizontalChopped = horizontalChopped' 40
+horizontalChopped' :: Double -> Double -> Diagram B
+horizontalChopped' h x =
     polygonFromCoords
         [ (0, 0)
-        , (40, 40)
-        , (x, 40)
+        , (h, h)
+        , (x, h)
         , (x, 0)
         ]
         & centerY
