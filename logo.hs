@@ -39,7 +39,7 @@ import Svgone qualified
 
 main :: IO ()
 main = do
-    for_ [(hs, "out", Just "out-raw"), (survey, "survey", Nothing), (hls, "hls", Nothing)] \(d, name, nameRaw) -> do
+    for_ [(haskell, "haskell", Just "haskell-raw"), (survey, "survey", Nothing), (hls, "hls", Nothing)] \(d, name, nameRaw) -> do
         let d' = renderBS . renderDia SVG opts $ d & scaleY 1.5 & center & pad 1.1 & lw 0
         maybe mempty (flip BSL.writeFile d' . (<> ".svg")) nameRaw
         Svgone.run Svgone.allPluginsWithDefaults "" (decodeUtf8 $ BSL.toStrict d') $ name <> ".svg"
@@ -53,8 +53,8 @@ main = do
             , _generateDoctype = True
             }
 
-hs :: Diagram B
-hs =
+haskell :: Diagram B
+haskell =
     hcat'
         (def & catMethod .~ Distrib & sep .~ 80)
         [ arrow & fc purple0
