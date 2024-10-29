@@ -78,37 +78,34 @@ hls =
 
 hlsWithoutHs :: Diagram B
 hlsWithoutHs =
-    alignBL letterH
+    alignBL (letterH & fc purple0)
         === alignTL
-            ( (letterL & snugB & snugR)
-                <> (letterS & alignBL)
+            ( (letterL & fc purple1 & snugB & snugR)
+                <> (letterS & fc purple2 & alignBL)
             )
 
 letterH :: Diagram B
 letterH =
-    fc purple0 $
-        reflectX $
-            ( (diagonal 120 & centerY & snugL)
-                <> (horizontal 210 & center & snugL)
-                    & snugR
-            )
-                <> (diagonal 120 & centerY & snugR)
+    reflectX $
+        ( (diagonal 120 & centerY & snugL)
+            <> (horizontal 210 & center & snugL)
+                & snugR
+        )
+            <> (diagonal 120 & centerY & snugR)
 
 letterL :: Diagram B
 letterL =
-    fc purple1 $
-        (horizontal 200 & alignBL)
-            <> (diagonal 120 & alignBL)
+    (horizontal 200 & alignBL)
+        <> (diagonal 120 & alignBL)
 
 letterS :: Diagram B
 letterS =
-    fc purple2 $
-        (horizontal 170 & alignTR)
-            <> ( (diagonal 40 & reflectY & alignTL)
-                    <> (horizontal 170 & alignBL)
-                        & alignBR
-                        & snugR
-               )
+    (horizontal 170 & alignTR)
+        <> ( (diagonal 40 & reflectY & alignTL)
+                <> (horizontal 170 & alignBL)
+                    & alignBR
+                    & snugR
+           )
 
 survey :: Diagram B
 survey =
