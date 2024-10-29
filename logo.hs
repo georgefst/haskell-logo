@@ -39,10 +39,15 @@ import Svgone qualified
 
 main :: IO ()
 main = do
-    for_ [(haskell, "haskell", Just "haskell-raw"), (survey, "survey", Nothing), (hls, "hls", Nothing)] \(d, name, nameRaw) -> do
-        let d' = renderBS . renderDia SVG opts $ d & scaleY 1.5 & center & pad 1.1 & lw 0
-        maybe mempty (flip BSL.writeFile d' . (<> ".svg")) nameRaw
-        Svgone.run Svgone.allPluginsWithDefaults "" (decodeUtf8 $ BSL.toStrict d') $ name <> ".svg"
+    for_
+        [ (haskell, "haskell", Just "haskell-raw")
+        , (survey, "survey", Nothing)
+        , (hls, "hls", Nothing)
+        ]
+        \(d, name, nameRaw) -> do
+            let d' = renderBS . renderDia SVG opts $ d & scaleY 1.5 & center & pad 1.1 & lw 0
+            maybe mempty (flip BSL.writeFile d' . (<> ".svg")) nameRaw
+            Svgone.run Svgone.allPluginsWithDefaults "" (decodeUtf8 $ BSL.toStrict d') $ name <> ".svg"
   where
     opts =
         SVGOptions
