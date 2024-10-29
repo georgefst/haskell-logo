@@ -39,7 +39,7 @@ import Svgone qualified
 
 main :: IO ()
 main = do
-    for_ [(hs, "out", Just "out-raw"), (survey, "survey", Nothing)] \(d, name, nameRaw) -> do
+    for_ [(hs, "out", Just "out-raw"), (survey, "survey", Nothing), (hlsWithHs, "hls", Nothing)] \(d, name, nameRaw) -> do
         let d' = renderBS . renderDia SVG opts $ d & scaleY 1.5 & center & pad 1.1 & lw 0
         maybe mempty (flip BSL.writeFile d' . (<> ".svg")) nameRaw
         Svgone.run Svgone.allPluginsWithDefaults "" (decodeUtf8 $ BSL.toStrict d') $ name <> ".svg"
@@ -57,17 +57,65 @@ hs :: Diagram B
 hs =
     hcat'
         (def & catMethod .~ Distrib & sep .~ 80)
-        [ arrow
-        , lambda
-        , equals
+        [ arrow & fc purple0
+        , lambda & fc purple1
+        , equals & fc purple2
         ]
+
+hsGrey :: Diagram B
+hsGrey =
+    hcat'
+        (def & catMethod .~ Distrib & sep .~ 80)
+        [ arrow & fc grey0
+        , lambda & fc grey1
+        , equals & fc grey2
+        ]
+
+hlsWithHs :: Diagram B
+hlsWithHs =
+    center hls
+        <> moveTo (p2 (-10, -40)) (scale (1 / 6) (center hsGrey))
+
+hls :: Diagram B
+hls =
+    alignBL letterH
+        === alignTL
+            ( (letterL & snugB & snugR)
+                <> (letterS & alignBL)
+            )
+
+letterH :: Diagram B
+letterH =
+    fc purple0 $
+        reflectX $
+            ( (diagonal 120 & centerY & snugL)
+                <> (horizontal 210 & center & snugL)
+                    & snugR
+            )
+                <> (diagonal 120 & centerY & snugR)
+
+letterL :: Diagram B
+letterL =
+    fc purple1 $
+        (horizontal 200 & alignBL)
+            <> (diagonal 120 & alignBL)
+
+letterS :: Diagram B
+letterS =
+    fc purple2 $
+        (horizontal 170 & alignTR)
+            <> ( (diagonal 40 & reflectY & alignTL)
+                    <> (horizontal 170 & alignBL)
+                        & alignBR
+                        & snugR
+               )
 
 survey :: Diagram B
 survey =
     hcat'
         (def & catMethod .~ Distrib & sep .~ 80)
-        [ arrow
-        , lambda
+        [ arrow & fc purple0
+        , lambda & fc purple1
         , checkbox
         ]
 
@@ -75,7 +123,6 @@ arrow :: Diagram B
 arrow =
     reflectX (diagonal 120)
         === reflectX (reflectY (diagonal 120))
-        & fc purple0
         & snugR
 
 lambda :: Diagram B
@@ -84,16 +131,13 @@ lambda =
         === ( (diagonal 120 & reflectY & reflectX)
                 <> (diagonal 120 & reflectY)
             )
-        & fc purple1
 
 equals :: Diagram B
 equals =
     vsep
         20
         [ reflectY (horizontalChopped 200)
-            & fc purple2
         , reflectY (horizontalChopped 140)
-            & fc purple2
         ]
         & centerY
         & translateX 150 -- TODO something more principled (`snugL` should work but envelope isn't tight enough)
@@ -133,6 +177,17 @@ diagonal' h y =
         ]
         & translateX -(h / 2)
 
+horizontal :: Double -> Diagram B
+horizontal x =
+    polygonFromCoords
+        [ (0, 0)
+        , (40, 40)
+        , (x + 40, 40)
+        , (x, 0)
+        ]
+        & centerY
+        & snugR
+
 horizontalChopped :: Double -> Diagram B
 horizontalChopped = horizontalChopped' 40
 horizontalChopped' :: Double -> Double -> Diagram B
@@ -160,3 +215,9 @@ purple1 :: Colour Double
 purple1 = sRGB24read "#5e5086"
 purple2 :: Colour Double
 purple2 = sRGB24read "#8f4e8b"
+grey0 :: Colour Double
+grey0 = sRGB24read "#666666"
+grey1 :: Colour Double
+grey1 = sRGB24read "#999999"
+grey2 :: Colour Double
+grey2 = sRGB24read "#bbbbbb"
