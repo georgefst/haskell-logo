@@ -39,7 +39,7 @@ import Svgone qualified
 
 main :: IO ()
 main = do
-    for_ [(hs, "out", Just "out-raw"), (survey, "survey", Nothing), (hlsWithHs, "hls", Nothing)] \(d, name, nameRaw) -> do
+    for_ [(hs, "out", Just "out-raw"), (survey, "survey", Nothing), (hls, "hls", Nothing)] \(d, name, nameRaw) -> do
         let d' = renderBS . renderDia SVG opts $ d & scaleY 1.5 & center & pad 1.1 & lw 0
         maybe mempty (flip BSL.writeFile d' . (<> ".svg")) nameRaw
         Svgone.run Svgone.allPluginsWithDefaults "" (decodeUtf8 $ BSL.toStrict d') $ name <> ".svg"
@@ -71,13 +71,13 @@ hsGrey =
         , equals & fc grey2
         ]
 
-hlsWithHs :: Diagram B
-hlsWithHs =
-    center hls
-        <> moveTo (p2 (-10, -40)) (scale (1 / 6) (center hsGrey))
-
 hls :: Diagram B
 hls =
+    center hlsWithoutHs
+        <> moveTo (p2 (-10, -40)) (scale (1 / 6) (center hsGrey))
+
+hlsWithoutHs :: Diagram B
+hlsWithoutHs =
     alignBL letterH
         === alignTL
             ( (letterL & snugB & snugR)
