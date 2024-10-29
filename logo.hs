@@ -73,53 +73,53 @@ survey =
 
 arrow :: Diagram B
 arrow =
-        reflectX (diagonal 120)
-            === reflectX (reflectY (diagonal 120))
-            & fc purple0
-            & snugR
+    reflectX (diagonal 120)
+        === reflectX (reflectY (diagonal 120))
+        & fc purple0
+        & snugR
 
 lambda :: Diagram B
 lambda =
-        reflectX (diagonal 120)
-            === ( (diagonal 120 & reflectY & reflectX)
-                    <> (diagonal 120 & reflectY)
-                )
-            & fc purple1
+    reflectX (diagonal 120)
+        === ( (diagonal 120 & reflectY & reflectX)
+                <> (diagonal 120 & reflectY)
+            )
+        & fc purple1
 
 equals :: Diagram B
 equals =
-        vsep
-            20
-            [ reflectY (horizontalChopped 200)
-                & fc purple2
-            , reflectY (horizontalChopped 140)
-                & fc purple2
-            ]
-            & centerY
-            & translateX 150 -- TODO something more principled (`snugL` should work but envelope isn't tight enough)
+    vsep
+        20
+        [ reflectY (horizontalChopped 200)
+            & fc purple2
+        , reflectY (horizontalChopped 140)
+            & fc purple2
+        ]
+        & centerY
+        & translateX 150 -- TODO something more principled (`snugL` should work but envelope isn't tight enough)
 
 checkbox :: Diagram B
 checkbox =
-        let
-            boxHeight = 100 -- matches the combined height of the lines in the original logo
-            tickWidth = 55 -- consistent with current diagonal line widths of 35 and 90
-            (tickHeightL, tickHeightR) = (75, 175) & both %~ (* (tickWidth / 90)) -- arbitrary, looks good
-            gapX = tickWidth -- doesn't have to be equal, but it looks about right
-           in
-            mconcat
-                [ composeAligned
-                    snugB
-                    mconcat
-                    [ diagonal' tickWidth tickHeightL & reflectX & centerY
-                    , diagonal' tickWidth tickHeightR
-                    ]
-                    & snugL
-                    & translateX gapX
-                    & fc purple0
-                , reflectY (horizontalChopped' 100 (tickWidth + gapX * 2 + (boxHeight + tickHeightL) / 2))
-                    & fc purple2
-                    & snugL
+    let
+        boxHeight = 100 -- matches the combined height of the lines in the original logo
+        tickWidth = 55 -- consistent with current diagonal line widths of 35 and 90
+        (tickHeightL, tickHeightR) = (75, 175) & both %~ (* (tickWidth / 90)) -- arbitrary, looks good
+        gapX = tickWidth -- doesn't have to be equal, but it looks about right
+     in
+        mconcat
+            [ composeAligned
+                snugB
+                mconcat
+                [ diagonal' tickWidth tickHeightL & reflectX & centerY
+                , diagonal' tickWidth tickHeightR
                 ]
+                & snugL
+                & translateX gapX
+                & fc purple0
+            , reflectY (horizontalChopped' 100 (tickWidth + gapX * 2 + (boxHeight + tickHeightL) / 2))
+                & fc purple2
+                & snugL
+            ]
 
 diagonal :: Double -> Diagram B
 diagonal = diagonal' 90
