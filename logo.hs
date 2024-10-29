@@ -181,11 +181,13 @@ diagonal' h y =
         & translateX -(h / 2)
 
 horizontal :: Double -> Diagram B
-horizontal x =
+horizontal = horizontal' 40
+horizontal' :: Double -> Double -> Diagram B
+horizontal' h x =
     polygonFromCoords
         [ (0, 0)
-        , (40, 40)
-        , (x + 40, 40)
+        , (h, h)
+        , (x + h, h)
         , (x, 0)
         ]
         & centerY
