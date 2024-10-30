@@ -41,6 +41,7 @@ main :: IO ()
 main = do
     for_
         [ (haskell, "haskell", Just "haskell-raw")
+        , (hlsReject, "hls-reject", Nothing)
         , (hls, "hls", Nothing)
         -- TODO holding this back until `svgone` issue with component reordering is fixed
         -- , (survey, "survey", Nothing)
@@ -77,18 +78,60 @@ hsGrey =
         , equals & fc grey2
         ]
 
-hls :: Diagram B
-hls =
-    center hlsWithoutHs
+hlsReject :: Diagram B
+hlsReject =
+    center hlsRejectWithoutHs
         <> moveTo (p2 (-10, -40)) (scale (1 / 6) (center hsGrey))
 
-hlsWithoutHs :: Diagram B
-hlsWithoutHs =
+hlsRejectWithoutHs :: Diagram B
+hlsRejectWithoutHs =
     alignBL (letterH & fc purple0)
         === alignTL
             ( (letterL & fc purple1 & snugB & snugR)
                 <> (letterS & fc purple2 & alignBL)
             )
+
+hls :: Diagram B
+hls =
+    mconcat
+        [ hcat'
+            (def & catMethod .~ Distrib & sep .~ 80)
+            [ arrow & fc purple0
+            , lambda & fc purple1
+            ]
+        , hcat'
+            (def & catMethod .~ Distrib & sep .~ 35)
+            [ mconcat
+                [ diagonal (80 + vgap * 2) & snugL
+                , horizontal (sBottomWidth - vgap * 2 - 120) & alignT & snugL
+                ]
+                & alignB
+                & snugR
+                & fc purple2
+            , mconcat
+                [ trapezium sBottomWidth & centerX
+                , diagonal vgap
+                    & reflectX
+                    & snugR
+                    & translate (V2 ((sBottomWidth - 200) / 2 + 60) 40)
+                , trapezium (sBottomWidth - (vgap * 2 + 80))
+                    & centerX
+                    & translate (V2 0 (40 + vgap))
+                , diagonal vgap
+                    & snugL
+                    & translate (V2 -((sBottomWidth - 200) / 2 + (20 - vgap)) (80 + vgap))
+                , trapezium (sBottomWidth - (vgap * 2 + 80) * 2)
+                    & centerX
+                    & translate (V2 0 (80 + vgap * 2))
+                ]
+                & fc purple2
+                & snugL
+            ]
+            & translate (V2 (330 + 3 * vgap - sBottomWidth) -(240 + 3 * vgap))
+        ]
+  where
+    vgap = 16.5 -- 35 / sqrt 2 / 1.5
+    sBottomWidth = 4 * vgap + 390 -- chosen so that midpoints of h and s have same width (2 * vgap + 270)
 
 letterH :: Diagram B
 letterH =
@@ -205,6 +248,17 @@ horizontalChopped' h x =
         ]
         & centerY
         & snugR
+
+trapezium :: Double -> Diagram B
+trapezium = trapezium' 40
+trapezium' :: Double -> Double -> Diagram B
+trapezium' h x =
+    polygonFromCoords
+        [ (0, 0)
+        , (h, h)
+        , (x - h, h)
+        , (x, 0)
+        ]
 
 polygonFromCoords :: [(Double, Double)] -> Diagram B
 polygonFromCoords =
