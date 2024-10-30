@@ -113,8 +113,8 @@ letterS =
                     & snugR
            )
 
-survey :: Diagram B
-survey =
+_survey :: Diagram B
+_survey =
     hcat'
         (def & catMethod .~ Distrib & sep .~ 80)
         [ arrow & fc purple0
