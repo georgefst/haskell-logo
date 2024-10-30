@@ -47,7 +47,7 @@ main = do
         -- , (survey, "survey", Nothing)
         ]
         \(d, name, nameRaw) -> do
-            let d' = renderBS . renderDia SVG opts $ d & scaleY 1.5 & center & pad 1.1 & lw 0
+            let d' = renderBS . renderDia SVG opts $ d & scaleY 1.5 & center & lw 0
             maybe mempty (flip BSL.writeFile d' . (<> ".svg")) nameRaw
             Svgone.run Svgone.allPluginsWithDefaults "" (decodeUtf8 $ BSL.toStrict d') $ name <> ".svg"
   where
