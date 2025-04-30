@@ -33,7 +33,7 @@ import Data.ByteString.Lazy.Char8 qualified as BSL
 import Data.Foldable
 import Data.Text.Encoding (decodeUtf8)
 import Diagrams.Backend.SVG
-import Diagrams.Prelude hiding (arrow)
+import Diagrams.Prelude hiding (arrow, arrow')
 import Graphics.Svg (renderBS)
 import Svgone qualified
 
@@ -43,6 +43,7 @@ main = do
         [ (haskell, "haskell", Just "haskell-raw")
         , (hlsReject, "hls-reject", Nothing)
         , (hls, "hls", Nothing)
+        , (webMatrix, "web-matrix", Nothing)
         -- TODO holding this back until `svgone` issue with component reordering is fixed
         -- , (survey, "survey", Nothing)
         ]
@@ -165,10 +166,33 @@ _survey =
         , checkbox
         ]
 
+webMatrix :: Diagram B
+webMatrix =
+    atPoints
+        [mkP2 -spacingLeft 0, mkP2 0 0, mkP2 spacingRight 0]
+        [ arrow' (120 * bracketMultiplier) & reflectX & fc bracketColour
+        , hsGrey & translate (V2 100 0)
+        , hsep
+            spacingSlash
+            [ diagonal' (90 / lineSkew) (120 * 2 * slashMultiplier) & centerY & scaleX lineSkew & fc bracketColour
+            , arrow' (120 * bracketMultiplier) & fc bracketColour
+            ]
+        ]
+  where
+    lineSkew = 0.3
+    bracketMultiplier = 1.25
+    slashMultiplier = 1.5
+    spacingSlash = 45
+    spacingLeft = 400
+    spacingRight = 500
+    bracketColour = sRGB24read "#7f1b1b"
+
 arrow :: Diagram B
-arrow =
-    reflectX (diagonal 120)
-        === reflectX (reflectY (diagonal 120))
+arrow = arrow' 120
+arrow' :: Double -> Diagram B
+arrow' h =
+    reflectX (diagonal h)
+        === reflectX (reflectY (diagonal h))
         & snugR
 
 lambda :: Diagram B
