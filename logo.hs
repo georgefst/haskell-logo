@@ -175,9 +175,9 @@ webMatrix =
         , arrow' (120 * bracketMultiplier) & fc purple1
         ]
   where
-    bracketMultiplier = 1
-    spacingLeft = 380
-    spacingRight = spacingLeft + 250
+    bracketMultiplier = 2/3
+    spacingLeft = 320
+    spacingRight = spacingLeft + 310
 
 arrow :: Diagram B
 arrow = arrow' 120
