@@ -170,12 +170,12 @@ webMatrix :: Diagram B
 webMatrix =
     atPoints
         [mkP2 -spacingLeft 0, mkP2 0 0, mkP2 spacingRight 0]
-        [ arrow' (120 * bracketMultiplier) & reflectX & fc bracketColour
+        [ arrow' (120 * bracketMultiplier) & reflectX & fc purple1
         , hsGrey & translate (V2 100 0)
         , hsep
             spacingSlash
-            [ diagonal' (90 / lineSkew) (120 * 2 * slashMultiplier) & centerY & scaleX lineSkew & fc bracketColour
-            , arrow' (120 * bracketMultiplier) & fc bracketColour
+            [ diagonal' (90 / lineSkew) (120 * 2 * slashMultiplier) & centerY & scaleX lineSkew & fc purple0
+            , arrow' (120 * bracketMultiplier) & fc purple1
             ]
         ]
   where
@@ -185,7 +185,6 @@ webMatrix =
     spacingSlash = 45
     spacingLeft = 400
     spacingRight = 500
-    bracketColour = sRGB24read "#7f1b1b"
 
 arrow :: Diagram B
 arrow = arrow' 120
