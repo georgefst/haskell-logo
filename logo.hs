@@ -172,19 +172,12 @@ webMatrix =
         [mkP2 -spacingLeft 0, mkP2 0 0, mkP2 spacingRight 0]
         [ arrow' (120 * bracketMultiplier) & reflectX & fc purple1
         , hsGrey & translate (V2 100 0)
-        , hsep
-            spacingSlash
-            [ diagonal' (90 / lineSkew) (120 * 2 * slashMultiplier) & centerY & scaleX lineSkew & fc purple0
-            , arrow' (120 * bracketMultiplier) & fc purple1
-            ]
+        , arrow' (120 * bracketMultiplier) & fc purple1
         ]
   where
-    lineSkew = 0.3
     bracketMultiplier = 1.25
-    slashMultiplier = 1.5
-    spacingSlash = 45
     spacingLeft = 400
-    spacingRight = 500
+    spacingRight = spacingLeft + 235
 
 arrow :: Diagram B
 arrow = arrow' 120
