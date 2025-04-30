@@ -170,7 +170,7 @@ webMatrix :: Diagram B
 webMatrix =
     atPoints
         [mkP2 -spacingLeft 0, mkP2 0 0, mkP2 spacingRight 0]
-        [ arrow' (120 * bracketMultiplier) & reflectX & fc purple1
+        [ arrow' (120 * bracketMultiplier) & reflectX & fc purple0
         , hsGrey & translate (V2 100 0)
         , arrow' (120 * bracketMultiplier) & fc purple1
         ]
