@@ -176,7 +176,7 @@ webMatrix =
         ]
   where
     bracketMultiplier = 1.25
-    spacingLeft = 400
+    spacingLeft = 380
     spacingRight = spacingLeft + 235
 
 arrow :: Diagram B
