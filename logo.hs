@@ -41,6 +41,7 @@ main :: IO ()
 main = do
     for_
         [ (haskell, "haskell", Just "haskell-raw")
+        , (debugger, "debugger", Nothing)
         , (hlsReject, "hls-reject", Nothing)
         , (hls, "hls", Nothing)
         , (webMatrix, "web-matrix", Nothing)
@@ -178,6 +179,33 @@ webMatrix =
     bracketMultiplier = 1.25
     spacingLeft = 380
     spacingRight = spacingLeft + 235
+
+debugger :: Diagram B
+debugger =
+    hcat'
+        (def & catMethod .~ Distrib & sep .~ 120)
+        [ play & fc purple0
+        , lambda & fc purple1
+        , pause & fc purple2
+        ]
+  where
+    play =
+        triangle (240 * h)
+            & rotateBy (-1 / 4)
+            & scaleX (3 / 2) -- counteracts the overall diagram skew
+            & snugR
+            & scale sf
+    pause =
+        hsep
+            20
+            ( rect 90 (240 * h)
+                & replicate 2
+                & scale sf
+            )
+            & centerY
+            & snugL
+    h = 0.7
+    sf = 0.6
 
 arrow :: Diagram B
 arrow = arrow' 120
